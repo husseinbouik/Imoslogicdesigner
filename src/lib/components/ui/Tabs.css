@@ -1,0 +1,35 @@
+.tabs-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-list {
+  display: flex;
+  border-bottom: 0.1rem solid var(--border-color);
+  margin-bottom: 1.2rem;
+}
+
+.tab-list-item {
+  padding: 0.8rem 1.6rem;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  position: relative;
+  bottom: -0.1rem;
+}
+
+.tab-list-item:hover {
+  background-color: var(--bg-app);
+}
+
+.tab-list-item.active {
+  color: var(--text-primary);
+  border-bottom: 0.2rem solid var(--accent-color);
+}
+
+.tab-content {
+  padding-top: 0.4rem;
+}

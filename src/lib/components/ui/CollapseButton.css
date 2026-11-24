@@ -1,0 +1,26 @@
+.collapse-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent; /* No border by default */
+  background-color: transparent; /* No bg by default */
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: var(--text-secondary); /* Default inactive icon color */
+  transition: all 0.2s ease;
+}
+
+/* The "active" state is now the default visual for this button */
+.collapse-btn.active {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--accent-text);
+}
+
+.collapse-btn.active:hover {
+  background-color: var(--accent-hover); /* A slightly darker shade for hover */
+  border-color: var(--accent-hover);
+}

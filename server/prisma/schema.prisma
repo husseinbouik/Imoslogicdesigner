@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Folder {
+  id        Int      @id @default(autoincrement())
+  name      String
+  type      String   // "PD" or "CP"
+  parentId  Int?
+  parent    Folder?  @relation("FolderToFolder", fields: [parentId], references: [id], onDelete: Cascade)
+  children  Folder[] @relation("FolderToFolder")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  partDefinitions PartDefinition[]
+  cps             CP[]
+
+  @@unique([name, parentId, type]) // Ensure unique folder names within the same parent and type
+}
+
+model PartDefinition {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  glbPath     String?  // relative path under /uploads, e.g. "glb/shelf-panel.glb"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // One PartDefinition can be assigned to many CPs
+  cps CP[]
+
+  folderId Int?
+  folder   Folder? @relation(fields: [folderId], references: [id], onDelete: SetNull)
+}
+
+model CP {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Optional FK to PartDefinition
+  partDefinitionId Int?
+  partDefinition   PartDefinition? @relation(fields: [partDefinitionId], references: [id], onDelete: SetNull)
+
+  folderId Int?
+  folder   Folder? @relation(fields: [folderId], references: [id], onDelete: SetNull)
+}

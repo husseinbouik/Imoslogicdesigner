@@ -1,0 +1,30 @@
+/* ── Header shell ────────────────────────────────────────────────────────── */
+.panel-header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.8rem;
+  height: 4rem;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.left-ui-panel.collapsed .panel-header-container {
+  border-bottom-color: transparent;
+}
+
+.panel-header-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1;
+}
+
+.panel-header-title-text {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+}

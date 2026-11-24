@@ -1,0 +1,82 @@
+.configurator-container {
+  padding: 1.2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  height: 100%; /* Fill the resizable panel */
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.configurator-header {
+  font-weight: 600;
+  padding: 0.4rem 0rem 1.2rem 0rem;
+  border-bottom: 0.1rem solid var(--border-color);
+  font-size: 1.6rem;
+  color: var(--text-primary);
+}
+
+.property-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.property-grid label {
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: var(--text-primary);
+}
+
+.property-grid input,
+.property-grid select {
+  width: 100%;
+  padding: 0.6rem;
+  border: 0.1rem solid var(--border-color);
+  background-color: var(--bg-input);
+  color: var(--text-primary);
+  border-radius: 0.4rem;
+  box-sizing: border-box;
+  font-size: 1.4rem;
+}
+
+/* --- ADD THIS NEW RULE --- */
+.property-grid input:disabled,
+.property-grid select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed; /* Good for UX to show it's not clickable */
+  background-color: var(
+    --bg-app
+  ); /* Optional: slightly different background for disabled state */
+}
+/* -------------------------- */
+
+/* New Separator Style */
+.property-separator {
+  grid-column: 1 / -1; /* Span all columns */
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 1rem 0;
+}
+
+.panel-style-section {
+  border: 0.1rem solid var(--border-color);
+  border-radius: 0.4rem;
+  padding: 1.2rem;
+  color: var(--text-primary);
+  background-color: var(
+    --bg-input
+  ); /* Slight contrast background for the section */
+}
+
+.panel-style-header {
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-transform: capitalize;
+}

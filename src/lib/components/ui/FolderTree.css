@@ -1,0 +1,65 @@
+.cpm-folder-root {
+  display: flex;
+  flex-direction: column;
+}
+
+.cpm-folder-node {
+  display: flex;
+  flex-direction: column;
+}
+
+.cpm-folder-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.4rem;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: all 0.12s ease;
+  user-select: none;
+}
+
+.cpm-folder-row:hover {
+  background: var(--bg-input);
+}
+
+.cpm-folder-row.cpm-list-item--active {
+  background: var(--bg-input);
+  border-left-color: var(--accent-color);
+}
+
+.cpm-folder-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  color: var(--text-secondary);
+  border-radius: 0.4rem;
+}
+.cpm-folder-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.cpm-folder-icon {
+  color: #fccc6e; /* nice folder yellow */
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.cpm-folder-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.cpm-folder-row:hover .cpm-folder-actions {
+  opacity: 1;
+}
+
+.cpm-folder-children {
+  display: flex;
+  flex-direction: column;
+}

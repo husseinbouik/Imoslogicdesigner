@@ -1,0 +1,162 @@
+.layers-interface-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  border-bottom: 0.1rem solid var(--border-color);
+  min-height: 0;
+}
+
+.layers-header {
+  font-weight: 600;
+  padding: 1.2rem;
+  margin: 0 1.2rem 1.2rem 1.2rem;
+  font-size: 1.6rem;
+  color: var(--text-primary);
+  border-bottom: 0.1rem solid var(--border-color);
+}
+
+.layers-body {
+  overflow: auto; /* Use auto for both scrollbars */
+  padding: 0 1.2rem 1.2rem 1.2rem;
+  flex-grow: 1;
+  min-height: 0;
+}
+
+/* --- THIS IS THE CRUCIAL FIX --- */
+/* Target the top-level div inside the scrolling container */
+.layers-body > div {
+  min-width: max-content; /* Force this container to be as wide as its widest child */
+}
+/* ------------------------------- */
+
+.layer-item,
+.layer-item-main {
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: 0.4rem;
+  font-size: 1.4rem;
+  color: var(--text-primary);
+}
+
+.layer-item-main:hover {
+  background-color: var(--bg-app);
+}
+
+.layer-item-main.selected {
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+}
+
+.layer-item-main {
+  display: flex;
+  align-items: center;
+}
+
+.layer-item-content {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.layer-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  padding: 0.2rem;
+  min-width: 1.4rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.layer-toggle.collapsed {
+  transform: rotate(-90deg);
+}
+
+.layer-item-text-main {
+  flex-grow: 1;
+  white-space: nowrap; /* Keep this to prevent text wrapping */
+}
+
+.layer-children {
+  border-left: 0.1rem solid var(--border-color);
+  padding-left: 0;
+  margin-left: 1rem;
+  max-height: 5000px;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.layer-children.collapsed {
+  max-height: 0;
+  border-left-color: transparent;
+}
+
+.layer-children-nested {
+  border-left: 0.1rem solid var(--border-color);
+  padding-left: 0;
+  margin-left: 1rem;
+}
+
+.layer-item-container {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+.layer-item-container:hover {
+  background-color: var(--bg-app);
+}
+
+.layer-item-container.selected {
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+}
+
+.layer-item-text {
+  flex-grow: 1;
+  font-size: 1.4rem;
+  white-space: nowrap; /* Keep this to prevent text wrapping */
+}
+
+.apply-default-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+  margin-right: 0.6rem;
+  font-size: 1.4rem;
+  opacity: 0.25;
+  transition: opacity 0.2s, background-color 0.2s;
+  border-radius: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+}
+
+.apply-default-btn.active {
+  opacity: 1;
+  color: var(--accent-color);
+}
+
+.apply-default-btn:hover {
+  opacity: 1;
+  color: var(--accent-color);
+}
+
+.layer-item-container.selected .apply-default-btn {
+  color: var(--accent-text);
+}
+
+.layer-item-container.selected .apply-default-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
