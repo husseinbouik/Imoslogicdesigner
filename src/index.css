@@ -1,39 +1,39 @@
 @import "tailwindcss";
 
 :root {
-  /* Light Theme Variables (Default) */
-  --bg-app: #ffffff; /* Changed from #e9ecef to white */
-  --bg-panel: rgba(255, 255, 255, 0.98); /* Changed to white */
-  --bg-input: #ffffff;
-  --text-primary: #212529;
-  --text-secondary: #868e96;
-  --text-hover: #495057;
-  --border-color: #dee2e6;
-  --border-active: #adb5bd;
-  --shadow-color: rgba(0, 0, 0, 0.1);
-  --shadow-subtle: rgba(0, 0, 0, 0.05);
+  /* Light Theme — warm paper + wood (portfolio family: Zoning Studio) */
+  --bg-app: #f3ecdf;
+  --bg-panel: rgba(250, 246, 238, 0.98);
+  --bg-input: #fffdf8;
+  --text-primary: #2b2118;
+  --text-secondary: #8a755c;
+  --text-hover: #57432c;
+  --border-color: #ddd0ba;
+  --border-active: #c3ab84;
+  --shadow-color: rgba(84, 60, 30, 0.18);
+  --shadow-subtle: rgba(84, 60, 30, 0.08);
 
-  --accent-color: #df002b;
-  --accent-hover: #c90026;
+  --accent-color: #9c6b34;
+  --accent-hover: #86602c;
   --accent-text: #ffffff;
 }
 
 [data-theme="dark"] {
-  /* Dark Theme Variables */
-  --bg-app: #3c3c3c;
-  --bg-panel: rgba(33, 37, 41, 0.98);
-  --bg-input: #2c3035;
-  --text-primary: #f8f9fa;
-  --text-secondary: #adb5bd;
-  --text-hover: #e9ecef;
-  --border-color: #495057;
-  --border-active: #6c757d;
-  --shadow-color: rgba(0, 0, 0, 0.5);
-  --shadow-subtle: rgba(0, 0, 0, 0.3);
+  /* Dark Theme — deep wood (matches Zoning Studio: #14100c / #211a14 / #e0a458) */
+  --bg-app: #14100c;
+  --bg-panel: rgba(33, 26, 20, 0.97);
+  --bg-input: #2a211a;
+  --text-primary: #f2e9dc;
+  --text-secondary: #b8a88f;
+  --text-hover: #f7efe0;
+  --border-color: #3a2d20;
+  --border-active: #6d543a;
+  --shadow-color: rgba(0, 0, 0, 0.55);
+  --shadow-subtle: rgba(0, 0, 0, 0.35);
 
-  --accent-color: #ff6b6b; /* Lighter red for contrast on dark */
-  --accent-hover: #ff8787;
-  --accent-text: #212529;
+  --accent-color: #e0a458;
+  --accent-hover: #ffb454;
+  --accent-text: #241708;
 }
 
 html {
@@ -44,6 +44,9 @@ html {
 body {
   margin: 0;
   padding: 0;
+  font-family:
+    "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
   background-color: var(--bg-app);
   color: var(--text-primary);
   transition:
@@ -70,14 +73,14 @@ body {
 
 .left-ui-panel {
   position: absolute;
-  bottom: 1rem;
+  top: 9.4rem;
   left: 1rem;
   z-index: 1;
   display: flex;
   flex-direction: column;
   width: 35rem;
-  height: calc(100vh - 2rem);
-  max-height: calc(100vh - 2rem);
+  height: calc(100vh - 10.4rem);
+  max-height: calc(100vh - 10.4rem);
   background: var(--bg-panel);
   border-radius: 0.8rem;
   box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
@@ -179,4 +182,90 @@ body {
   background-color: var(--accent-color);
   border-color: var(--accent-color);
   color: var(--accent-text);
+}
+
+/* --- APP HEADER (portfolio showcase bar) --- */
+
+.app-header {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  max-width: calc(100vw - 34rem);
+  padding: 1rem 1.8rem 1rem 1.4rem;
+  background: var(--bg-panel);
+  border: 0.1rem solid var(--border-color);
+  border-radius: 1rem;
+  box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+}
+
+.app-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 1.3rem;
+  min-width: 0;
+}
+
+.brand-mark {
+  display: flex;
+  gap: 3px;
+  padding: 6px;
+  border: 2px solid var(--accent-color);
+  border-radius: 6px;
+  height: 4.4rem;
+  align-items: stretch;
+  flex-shrink: 0;
+}
+
+.brand-mark span {
+  display: block;
+  width: 5px;
+  background: linear-gradient(180deg, #d9a05b, #9c6b34);
+  border-radius: 2px;
+}
+
+.brand-mark span:nth-child(2) {
+  width: 9px;
+}
+
+.app-header-title {
+  margin: 0;
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.app-header-tag {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--accent-color);
+}
+
+.app-header-author {
+  margin: 0.2rem 0 0;
+  font-size: 1.3rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.demo-badge {
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent-text);
+  background: var(--accent-color);
+  border-radius: 999px;
+  padding: 0.4rem 1rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }

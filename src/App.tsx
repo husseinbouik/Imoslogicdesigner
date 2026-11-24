@@ -21,6 +21,7 @@ import { FiSun, FiMoon, FiGrid, FiPackage, FiBox } from "react-icons/fi";
 import { useZoningLogic } from "./lib/hooks/useZoningLogic";
 import { useTheme } from "./lib/hooks/useTheme";
 import { useCPs } from "./lib/hooks/useCPs";
+import { partDefinitionApi, DEMO_MODE } from "./lib/api";
 import { useState } from "react";
 import type { cpNameDataData } from "./lib/types/types";
 
@@ -58,8 +59,10 @@ function App() {
   const cpNameData = useMemo(() => {
     const map: Record<string, cpNameDataData> = {};
     for (const cp of cps) {
-      if (cp.partDefinition?.glbPath) {
-        const glbUrl = `/uploads/${cp.partDefinition.glbPath}`;
+      const glbUrl = cp.partDefinition
+        ? partDefinitionApi.getGlbUrl(cp.partDefinition)
+        : null;
+      if (glbUrl) {
         // Create a stable named component for this CP so React can reconcile properly
         const CpComponent: cpNameDataData = props => (
           <GlbModel {...props} glbUrl={glbUrl} />
@@ -75,6 +78,32 @@ function App() {
       <JsonInterface data={data} onDataChange={setData}>
         {({ handleImport, handleExport }) => (
           <div id="app-container">
+            <header className="app-header">
+              <div className="app-header-brand">
+                <div className="brand-mark" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+                <div>
+                  <h1 className="app-header-title">
+                    Article Designer{" "}
+                    <span className="app-header-tag">iMOS-Style Logic</span>
+                  </h1>
+                  <p className="app-header-author">
+                    by Hussein Bouik, with Mohamed Alfakir
+                  </p>
+                </div>
+              </div>
+              {DEMO_MODE && (
+                <span
+                  className="demo-badge"
+                  title="Static showcase — CP/PD data is stored locally in your browser"
+                >
+                  Demo mode
+                </span>
+              )}
+            </header>
             {isCPManagerOpen && (
               <CPManager onClose={() => setIsCPManagerOpen(false)} />
             )}

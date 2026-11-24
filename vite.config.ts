@@ -4,6 +4,9 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 
 export default defineConfig({
+  // Base path is "/" for local dev and the full-stack app. The static
+  // GitHub Pages showcase builds with VITE_BASE=/Imoslogicdesigner/.
+  base: process.env.VITE_BASE ?? "/",
   plugins: [tailwindcss(), react()],
   resolve: {
     alias: {

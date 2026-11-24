@@ -1,3 +1,17 @@
+import {
+  localFolderApi,
+  localCpApi,
+  localPartDefinitionApi,
+} from "./localStore";
+
+/**
+ * True when the app is built for the static showcase (GitHub Pages) with
+ * VITE_DEMO_MODE=true. In demo mode the CP / PD / folder APIs are served by
+ * a localStorage-backed store (see ./localStore.ts) instead of the Express
+ * backend, so the whole app runs front-end-only.
+ */
+export const DEMO_MODE = import.meta.env.VITE_DEMO_MODE === "true";
+
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 export interface Folder {
@@ -52,7 +66,7 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
 
 // ── Folder API ────────────────────────────────────────────────────────────────
 
-export const folderApi = {
+const httpFolderApi = {
   /** List all Folders by type */
   getAll: (type: "PD" | "CP") => request<Folder[]>(`/folders?type=${type}`),
 
@@ -80,7 +94,7 @@ export const folderApi = {
 
 // ── CP API ────────────────────────────────────────────────────────────────────
 
-export const cpApi = {
+const httpCpApi = {
   /** List all CPs (includes partDefinition) */
   getAll: () => request<CP[]>("/cps"),
 
@@ -127,7 +141,7 @@ export const cpApi = {
 
 // ── PartDefinition API ────────────────────────────────────────────────────────
 
-export const partDefinitionApi = {
+const httpPartDefinitionApi = {
   /** List all PartDefinitions (includes assigned CPs) */
   getAll: () => request<PartDefinition[]>("/part-definitions"),
 
@@ -204,3 +218,12 @@ export const partDefinitionApi = {
     return `/uploads/${pd.glbPath}`;
   },
 };
+
+// ── Active API ────────────────────────────────────────────────────────────────
+// The HTTP backend normally; the local demo store when DEMO_MODE is on.
+
+export const folderApi = DEMO_MODE ? localFolderApi : httpFolderApi;
+export const cpApi = DEMO_MODE ? localCpApi : httpCpApi;
+export const partDefinitionApi = DEMO_MODE
+  ? localPartDefinitionApi
+  : httpPartDefinitionApi;
